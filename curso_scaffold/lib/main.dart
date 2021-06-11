@@ -12,8 +12,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _State extends State<MyApp> {
-  String _value = '';
-  void _onClicked() => setState(() => _value = new DateTime.now().toString());
   
   @override
   Widget build(BuildContext context) {
@@ -21,17 +19,22 @@ class _State extends State<MyApp> {
       appBar: new AppBar(
         title: new Text('Name here'),
       ),
-      floatingActionButton: new FloatingActionButton(
-          onPressed: _onClicked,
-        backgroundColor: Colors.red,
-        mini: true,
-        child: new Icon(Icons.timer),
+      drawer: new Drawer(
+        child: new Container(
+          padding: new EdgeInsets.all(32.0),
+          child: new Column(
+            children: <Widget>[
+              new Text("Hello Drawer"),
+              new RaisedButton(onPressed: () => Navigator.pop(context), child: new Text("Close"),)
+            ],
+          ),
+        ),
       ),
       body: new Container(
         padding: new EdgeInsets.all(32.0),
         child: new Column(
           children: <Widget>[
-            new Text(_value)
+            new Text('Add Widgets Here')
           ],
         ),
       ),
