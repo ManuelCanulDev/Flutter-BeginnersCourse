@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'dart:async';
 
 void main() {
   runApp(new MaterialApp(
@@ -16,20 +13,21 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
 
-  String _value = '';
-  
-  Future _selectDate() async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
+  String _display = '';
 
-    if(picked != null) setState(() {
-      _value = picked.toString();
+  String _value = '';
+
+  void _onChange(String value){
+    setState(() {
+      _value = value;
     });
   }
 
+  void _onClick(){
+    setState(() {
+      _display = _value;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -40,8 +38,9 @@ class _State extends State<MyApp> {
         padding: new EdgeInsets.all(32.0),
         child: new Column(
           children: <Widget>[
-            new Text(_value),
-            new RaisedButton(onPressed: _selectDate, child: new Text('Generar Fecha'),)
+            new Text('TEXTO CON VALOR: ${_display}'),
+            new TextField(onChanged: _onChange,),
+            new RaisedButton(onPressed: _onClick, child: new Text('ENVIAR DATOS'),)
           ],
         ),
       ),
