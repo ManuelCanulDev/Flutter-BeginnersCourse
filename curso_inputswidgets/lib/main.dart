@@ -13,15 +13,13 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
 
-  String _Value = "";
+  bool _value1 = false;
 
-  void onChange(String value){
-    setState(() => _Value = 'Change ${value}');
-  }
+  bool _value2 = false;
 
-  void onSubmit(String value){
-    setState(() => _Value = 'Submit ${value}');
-  }
+  void _value1Changed(value) => setState(() => _value1 = value);
+
+  void _value2Changed(value) => setState(() => _value2 = value);
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +31,16 @@ class _State extends State<MyApp> {
         padding: new EdgeInsets.all(32.0),
         child: new Column(
           children: <Widget>[
-            new Text(_Value),
-            new TextField(
-              decoration: new InputDecoration(
-                labelText: "Hello",
-                hintText: "Hint",
-                icon: new Icon(Icons.people)
+            new Checkbox(value: _value1, onChanged: _value1Changed),
+            new CheckboxListTile(
+                value: _value2,
+                onChanged: _value2Changed,
+                title: new Text('Hola perro'),
+                controlAffinity: ListTileControlAffinity.leading,
+                subtitle: new Text("Subtitulo"),
+                secondary: new Icon(Icons.archive),
+              activeColor: Colors.red,
               ),
-              autocorrect: true,
-              autofocus: true,
-              keyboardType: TextInputType.number,
-              onChanged: onChange,
-              onSubmitted: onSubmit,
-            )
           ],
         ),
       ),
