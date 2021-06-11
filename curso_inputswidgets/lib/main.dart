@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,16 +13,12 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
 
-  int _value1 = 0;
+  bool _value1 = false;
 
-  void _setValue1(value) => setState(() => _value1 = value);
+  bool _value2 = false;
 
-  Widget makeRadios(){
-    final list = List<Radio>.generate(10, (i) => new Radio(value: i, groupValue: _value1, onChanged: _setValue1));
-
-    Column column = new Column(children: list,);
-    return column;
-  }
+  void _onChanged1(bool value) => setState(() => _value1 = value);
+  void _onChanged2(bool value) => setState(() => _value2 = value);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +30,8 @@ class _State extends State<MyApp> {
         padding: new EdgeInsets.all(32.0),
         child: new Column(
           children: <Widget>[
-            makeRadios(),
+            new Switch(value: _value1, onChanged: _onChanged1),
+            new SwitchListTile(value: _value2, onChanged: _onChanged2, title: new Text("Hello Word", style: new TextStyle(fontWeight: FontWeight.bold, color: Colors.red),))
           ],
         ),
       ),
