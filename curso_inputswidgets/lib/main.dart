@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,13 +15,16 @@ class MyApp extends StatefulWidget {
 
 class _State extends State<MyApp> {
 
-  bool _value1 = false;
+  int _value1 = 0;
 
-  bool _value2 = false;
+  void _setValue1(value) => setState(() => _value1 = value);
 
-  void _value1Changed(value) => setState(() => _value1 = value);
+  Widget makeRadios(){
+    final list = List<Radio>.generate(10, (i) => new Radio(value: i, groupValue: _value1, onChanged: _setValue1));
 
-  void _value2Changed(value) => setState(() => _value2 = value);
+    Column column = new Column(children: list,);
+    return column;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,16 +36,7 @@ class _State extends State<MyApp> {
         padding: new EdgeInsets.all(32.0),
         child: new Column(
           children: <Widget>[
-            new Checkbox(value: _value1, onChanged: _value1Changed),
-            new CheckboxListTile(
-                value: _value2,
-                onChanged: _value2Changed,
-                title: new Text('Hola perro'),
-                controlAffinity: ListTileControlAffinity.leading,
-                subtitle: new Text("Subtitulo"),
-                secondary: new Icon(Icons.archive),
-              activeColor: Colors.red,
-              ),
+            makeRadios(),
           ],
         ),
       ),
